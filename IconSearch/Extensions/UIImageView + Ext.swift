@@ -19,7 +19,7 @@ extension UIImageView {
         }
         
         let urlString = url.absoluteString as NSString
-        if let cachedImage = ImageCache.shared.object(forKey: urlString) {
+        if let cachedImage =  Cache.imageCache.object(forKey: urlString) {
             self.image = cachedImage
             return
         }
@@ -29,7 +29,7 @@ extension UIImageView {
         let task = Task {
             do {
                 let image = try await NetworkService().downloadImage(from: url)
-                ImageCache.shared.setObject(image, forKey: urlString)
+                Cache.imageCache.setObject(image, forKey: urlString)
                 
                 DispatchQueue.main.async {
                     if !(self.currentTask?.isCancelled ?? true) {

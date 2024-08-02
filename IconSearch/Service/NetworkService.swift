@@ -16,8 +16,8 @@ class NetworkService {
     private let vector = "false"
     private let formar = "png"
     
-    private let iconsCache = NSCache<NSString, IconsModel>()
-    private let imageCache = NSCache<NSString, UIImage>()
+    private let iconsCache = Cache.iconsCache
+    private let imageCache = Cache.imageCache
     
     func searchIcons(query: String) async throws -> IconsModel {
         let cacheKey = query as NSString
