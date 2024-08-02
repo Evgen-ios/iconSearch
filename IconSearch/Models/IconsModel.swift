@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - IconsModel
-struct IconsModel: Codable {
+class IconsModel: Codable {
     let totalCount: Int
     var icons: [IconModel]
     
@@ -17,7 +17,7 @@ struct IconsModel: Codable {
 }
 
 // MARK: - IconModel
-struct IconModel: Codable {
+class IconModel: Codable {
     let iconID: Int
     let tags: [String]
     let publishedAt: String

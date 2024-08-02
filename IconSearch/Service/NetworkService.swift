@@ -5,7 +5,6 @@
 //  Created by Evgeniy Goncharov on 01.08.2024.
 //
 
-import Foundation
 import UIKit
 
 class NetworkService {
@@ -17,7 +16,15 @@ class NetworkService {
     private let vector = "false"
     private let formar = "png"
     
+    private let iconsCache = NSCache<NSString, IconsModel>()
+    private let imageCache = NSCache<NSString, UIImage>()
+    
     func searchIcons(query: String) async throws -> IconsModel {
+        let cacheKey = query as NSString
+        if let cachedIcons = iconsCache.object(forKey: cacheKey) {
+            return cachedIcons
+        }
+        
         var components = URLComponents(string: baseURL)!
         let queryItems: [URLQueryItem] = [
             URLQueryItem(name: "query", value: query),
@@ -43,6 +50,8 @@ class NetworkService {
         }
         
         let iconsModel = try JSONDecoder().decode(IconsModel.self, from: data)
+        iconsCache.setObject(iconsModel, forKey: cacheKey)
+        
         return iconsModel
     }
     
@@ -60,6 +69,11 @@ class NetworkService {
     }
     
     func downloadImage(from url: URL) async throws -> UIImage {
+        let cacheKey = url.absoluteString as NSString
+        if let cachedImage = imageCache.object(forKey: cacheKey) {
+            return cachedImage
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = [
@@ -77,6 +91,9 @@ class NetworkService {
             throw URLError(.cannotParseResponse)
         }
         
+        imageCache.setObject(image, forKey: cacheKey)
+        
         return image
     }
 }
+
