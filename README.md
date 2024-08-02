@@ -1,4 +1,4 @@
-# iconSearch
+# IconSearch
 Написать приложение для iPhone для поиска иконок (iconfinder.com)
 
 ## Screenshot
