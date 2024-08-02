@@ -3,4 +3,4 @@
 
 ## Screenshot
 
-![Screenshot1](https://github.com/Evgen-ios/iconSearch/blob/main/iconSearch/Screenshot/Image.jpg?raw=true)
+![Screenshot1](https://github.com/Evgen-ios/iconSearch/blob/main/IconSearch/Screenshot/Image.jpg?raw=true)
